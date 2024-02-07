@@ -1,0 +1,10 @@
+{
+    "[development]": {
+        "auth": {
+            "passport": {
+                "strategy": "xsuaa",
+                "users": {}
+            }
+        }
+    }
+}

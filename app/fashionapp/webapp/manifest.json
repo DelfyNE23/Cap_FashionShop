@@ -1,0 +1,140 @@
+{
+    "_version": "1.59.0",
+    "sap.app": {
+        "id": "fashionapp",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.12.2",
+            "toolsId": "c971ddc9-e51b-4fe4-bd8e-351d99e9d2d2"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/odata/v4/fashion-shop-/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.4",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "fashionapp.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "Fashion_ItemsList",
+                    "target": "Fashion_ItemsList"
+                },
+                {
+                    "pattern": "Fashion_Items({key}):?query:",
+                    "name": "Fashion_ItemsObjectPage",
+                    "target": "Fashion_ItemsObjectPage"
+                }
+            ],
+            "targets": {
+                "Fashion_ItemsList": {
+                    "type": "Component",
+                    "id": "Fashion_ItemsList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "contextPath": "/Fashion_Items",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "Fashion_Items": {
+                                    "detail": {
+                                        "route": "Fashion_ItemsObjectPage"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "Fashion_ItemsObjectPage": {
+                    "type": "Component",
+                    "id": "Fashion_ItemsObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "contextPath": "/Fashion_Items"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "ManagedAppRouter"
+    }
+}
